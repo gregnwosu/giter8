@@ -61,10 +61,8 @@ object Builds extends sbt.Build {
         "sbt 0.11 plugin for testing giter8 templates",
       sbtPlugin := true,
       resolvers += Resolver.url("Typesafe repository", new java.net.URL("http://typesafe.artifactoryonline.com/typesafe/ivy-releases/"))(Resolver.defaultIvyPatterns),
-      libraryDependencies <++= (sbtDependency, sbtVersion) { (sd, sv) =>
-        Seq(sd,
-            "org.scala-tools.sbt" %% "scripted-plugin" % sv
-            )
+      libraryDependencies <+= (sbtVersion) { (sv) =>
+        "org.scala-tools.sbt" %% "scripted-plugin" % sv
       }
     )) dependsOn (lib)
 
